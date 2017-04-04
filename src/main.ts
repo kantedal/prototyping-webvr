@@ -1,3 +1,7 @@
+// /// <reference path="./typings/three.d.ts" />
+// /// <reference path="./typings/three-vreffect.d.ts" />
+// /// <reference path="./typings/three-vrcontrols.d.ts" />
+
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
