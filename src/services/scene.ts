@@ -1,7 +1,6 @@
 
 export class Scene {
   private _scene: THREE.Scene
-  private _cube: THREE.Mesh;
   private _skybox: any;
 
   constructor() {
@@ -37,13 +36,42 @@ export class Scene {
     objLoader.load('../assets/saloon.js', (geometry, materials) => {
       console.log(materials)
       let object = new THREE.Mesh(geometry, material)
-      object.position.set(0, 1.3, -1);
+      object.position.set(0, 1.3, -1.5);
       object.scale.set(0.06, 0.06, 0.06);
       this._scene.add(object)
     })
 
-    // Add cube mesh to your three.js scene
-    this._scene.add(this._cube);
+
+    let modeller1Texture = THREE.ImageUtils.loadTexture('../assets/modeller1.png')
+    let modeller2Texture = THREE.ImageUtils.loadTexture('../assets/modeller2.png')
+    let viewerTexture = THREE.ImageUtils.loadTexture('../assets/viewer.png')
+
+    let uiPlaneGeometry = new THREE.PlaneGeometry(16,9,1,1);
+    let uiPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: modeller1Texture, transparent: true })
+    let uiPlane = new THREE.Mesh(uiPlaneGeometry, uiPlaneMaterial)
+    uiPlane.scale.set(0.11, 0.11, 0.11)
+    uiPlane.position.set(0, 1.6, -1.0)
+    this._scene.add(uiPlane)
+
+    window.onkeydown = e => {
+      switch (e.which) {
+        case 49:
+          uiPlaneMaterial.map = modeller1Texture
+          uiPlaneMaterial.needsUpdate = true
+          break
+        case 50:
+          uiPlaneMaterial.map = modeller2Texture
+          uiPlaneMaterial.needsUpdate = true
+          break
+        case 51:
+          uiPlaneMaterial.map = viewerTexture
+          uiPlaneMaterial.needsUpdate = true
+          break
+      }
+    }
+
+
+
   }
 
   public render(delta: number) {
@@ -63,9 +91,6 @@ export class Scene {
     // Place it on the floor.
     this._skybox.position.y = 5 / 2;
     this._scene.add(this._skybox);
-
-    // Place the cube in the middle of the scene, at user height.
-    this._cube.position.set(0, 1.5, 0);
   }
 
   get scene(): THREE.Scene { return this._scene; }
