@@ -9,11 +9,11 @@ export class Scene {
 
     let loader = new THREE.TextureLoader();
     loader.load('../assets/box.png', (texture) => {
-      texture.wrapS = THREE.RepeatWrapping;
-      texture.wrapT = THREE.RepeatWrapping;
-      texture.repeat.set(5, 5);
+      texture.wrapS = THREE.RepeatWrapping
+      texture.wrapT = THREE.RepeatWrapping
+      texture.repeat.set(5, 5)
 
-      let geometry = new THREE.BoxGeometry(5, 5, 5);
+      let geometry = new THREE.BoxGeometry(5, 5, 5)
       let material = new THREE.MeshBasicMaterial({
         map: texture,
         color: 0x01BE00,
@@ -21,18 +21,26 @@ export class Scene {
       });
 
       // Align the skybox to the floor (which is at y=0).
-      this._skybox = new THREE.Mesh(geometry, material);
-      this._skybox.position.y = 5 / 2;
-      this._scene.add(this._skybox);
+      this._skybox = new THREE.Mesh(geometry, material)
+      this._skybox.position.y = 5 / 2
+      this._scene.add(this._skybox)
     });
 
     // Create 3D objects.
-    let geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
     let material = new THREE.MeshNormalMaterial();
-    this._cube = new THREE.Mesh(geometry, material);
 
-    // Position cube mesh to be right in front of you.
-    this._cube.position.set(0, 1.5, -1);
+    let light = new THREE.AmbientLight()
+    light.position.set(3,3,3)
+    this._scene.add(light)
+
+    let objLoader = new THREE.JSONLoader();
+    objLoader.load('../assets/saloon.js', (geometry, materials) => {
+      console.log(materials)
+      let object = new THREE.Mesh(geometry, material)
+      object.position.set(0, 1.3, -1);
+      object.scale.set(0.06, 0.06, 0.06);
+      this._scene.add(object)
+    })
 
     // Add cube mesh to your three.js scene
     this._scene.add(this._cube);
@@ -40,7 +48,7 @@ export class Scene {
 
   public render(delta: number) {
     // Apply rotation to cube mesh
-    this._cube.rotation.y += delta * 0.0006;
+    //this._cube.rotation.y += delta * 0.0006;
   }
 
   public setStageDimensions(stage: any) {
