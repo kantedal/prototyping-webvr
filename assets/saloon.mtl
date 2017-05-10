@@ -1,0 +1,24 @@
+newmtl SaloonFBXASC032GroundFBXASC046001SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd Saloon_Ground_albedo.jpeg
+Ni 1.00
+Ks 0.20 0.20 0.20
+Ns 18.00
+newmtl SaloonFBXASC046002SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd Saloon_albedo.jpeg
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 18.00
+newmtl vr_controller_vive_1_5:polySurface1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 0.00
